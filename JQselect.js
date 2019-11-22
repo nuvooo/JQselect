@@ -1,5 +1,4 @@
-function SelectDropdown(para){
-
+function jQselect(para){
     defaults = {
         select: null,
         title: null,
@@ -13,7 +12,6 @@ function SelectDropdown(para){
         livesearch: true,
         searchtext: null,
     }
-
     app = {
         title: defaults.title,
         abort: defaults.label.abort,
@@ -24,13 +22,12 @@ function SelectDropdown(para){
         livesearch: defaults.livesearch,
         searchtext: defaults.searchtext,
     }
-
     if(para.label){
     if(para.label.abort){ app.abort = para.label.abort; }; 
     if(para.label.save){ app.save = para.label.save; }; 
     if(para.label.single){ app.single = para.label.single; }; 
     if(para.label.plural){ app.plural = para.label.plural; }; 
-}
+    }
     if(para.action === false){ app.action = para.action; }; 
     if(para.livesearch === false){ app.livesearch = para.livesearch; }; 
     if(para.searchtext){ app.searchtext = para.searchtext; }; 
@@ -46,7 +43,8 @@ function SelectDropdown(para){
     .wrap('<div></div>')
     .parent().html()
     .replace(/select/g,'ul class=""')
-    .replace(/option/g,'li class=""');
+    .replace(/optgroup/g,"span")
+    .replace(/option/g,"li");
     $("."+para.select).replaceWith(start + rep + end);
 
     $("."+para.select).on("click", function(e){
