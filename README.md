@@ -12,7 +12,7 @@ This plugin manipulates the standard html input field "select" and thus creates 
 ````
 ### Settings
 ```
-SelectDropdown({
+JQselect({
     select: "divclass",
     title:"Title",
     searchtext:'Placeholder',
