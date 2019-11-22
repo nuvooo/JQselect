@@ -2,6 +2,14 @@
 
 ## Javascript jQuery Plugin
 
+
+### include sources
+
+````
+  <link rel="stylesheet" type="text/css" href="JQselect.css"/>
+  <script type="text/javascript" src="JQselect.js"></script>
+````
+### Settings
 ```
 SelectDropdown({
     select: "divclass",
