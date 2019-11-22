@@ -2,7 +2,7 @@
 
 ## Javascript jQuery Plugin
 
-´´´
+```
 SelectDropdown({
     select: "ziele",
     title:"Reiseziel",
@@ -16,4 +16,4 @@ SelectDropdown({
     },
     action:true,
 });
-´´´
+```
