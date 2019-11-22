@@ -4,13 +4,13 @@
 
 ```
 SelectDropdown({
-    select: "ziele",
-    title:"Reiseziel",
-    searchtext:'Reiseziel',
+    select: "divclass",
+    title:"Title",
+    searchtext:'Placeholder',
     livesearch:true,
     label:{
-        abort:'Abbrechen',
-        save: 'Übernehmen',
+        abort:'Abort',
+        save: 'Save',
         single: 'item',
         plural: 'items',
     },
