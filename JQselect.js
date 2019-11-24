@@ -45,6 +45,7 @@
   }
 
   var selected = $(selector + " > li:first").text();
+  $(selector + " > li:first").attr('selected', "true");
   $(selector).parent().parent().find(".input-search").text(selected);
   $(selector).parent().parent().find(".input-modal ul").append('<div class="no-entrys">'+plugin.settings.noresults+'</div>');
   $(selector).parent().parent().on("click", function(e){
@@ -79,17 +80,18 @@
 
 let value = [];
 
-$(selector).parent().parent().find(".input-modal ul li").each(function() {
+$(selector).find("li").each(function() {
   $(this).on("click", function(){
+    $(selector).find("li").attr('selected', false);
     if ($(element).attr("multiple")){
     value.push($(this).attr('value'));
-    console.log("multi");
     }
     else
     {
       value = [$(this).attr('value')];
     }
     onChange.call(this, value);
+    update();
   });
 });
   let innerHtml = '<input class="input-select-search" type="text"><div data-list=""></div>';
@@ -102,6 +104,20 @@ $(selector).parent().parent().find(".input-modal ul li").each(function() {
 $(document).on("click",".abort, .success",function(){
   $(selector).parent().parent().find(".input-modal").css("display", "none");
 });
+
+$(selector).parent().on("click", ".success", function(){
+$(this).parent().hide();
+  update();
+  $(selector).find("li").each(function() {
+    $(this).attr('selected', false);
+    for (let x = 0; x < value.length; x++) {
+      if(parseInt(value[x]) == parseInt($(this).attr("value"))){
+       $(selector).parent().parent().find(".input-search").text($(this).text());
+    }
+  }
+  });
+});
+
 
 $(document).mouseup(function(e) 
 {
@@ -117,6 +133,16 @@ var onChange = settings.onChange;
 var onShow = settings.onShow;
 var onClick = settings.onClick;
 
+function update(){
+  $(selector).find("li").each(function() {
+    $(this).attr('selected', false);
+    for (let x = 0; x < value.length; x++) {
+      if(parseInt(value[x]) == parseInt($(this).attr("value"))){
+        $(this).attr('selected', true);
+    }
+  }
+  });
+}
 
 	};
 })(jQuery);

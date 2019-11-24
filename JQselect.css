@@ -96,6 +96,10 @@
     line-height: 40px;
     transition: ease all .3s;
 }
+
+.input-modal ul li[selected]{
+    font-weight: bold;
+}
 .input-modal ul span{
     height: 100%;
     width: 100%;
