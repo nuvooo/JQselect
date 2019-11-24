@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+    <title>jQselect</title>
+    <link rel="stylesheet" type="text/css" href="JQselect.css"/>
+  </head>
+  <body>
+      <style>
+        #page{
+        width: 1000px;
+        max-width: 100%;
+        margin: 0 auto;
+        }
+        </style>
+      <div id="page">
+    <h1>jQselect</h1>
+      <div><h2>Standard select </h2>
+        <p>
+        <select>
+            <option value="1">Germany</option>
+            <option value="2">USA</option>
+            <option value="3">Dutch</option>
+            <option value="4">Italy</option>
+            <option value="5">Polan</option>
+            <option value="6">Spain</option>
+        </select>
+      </p>
+    </div>
+    <div><h2>Simple jQselect select</h2>
+        <p>
+        <select id="example_1">
+            <option value="1">Germany</option>
+            <option value="2">USA</option>
+            <option value="3">Dutch</option>
+            <option value="4">Italy</option>
+            <option value="5">Polan</option>
+            <option value="6">Spain</option>
+        </select>
+      </p>
+    </div>
+    <div><h2>Multi jQselect select</h2>
+        <p>
+        <select id="example_2" multiple>
+            <option value="1">Germany</option>
+            <option value="2">USA</option>
+            <option value="3">Dutch</option>
+            <option value="4">Italy</option>
+            <option value="5">Polan</option>
+            <option value="6">Spain</option>
+        </select>
+      </p>
+    </div>
+      </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="JQselect.js"></script>
+    <script>
+    $('#example_1').jQselect({
+    title:"Example 1",
+    searchtext:'Example 1',
+    livesearch:true,
+    noresults: 'No examples',
+    label:{
+        abort:'Abort',
+        save: 'Save',
+        single: 'example',
+        plural: 'examples',
+    },
+    action:true,
+    onChange: function(value) {
+    console.log("from here"+ value);
+      },
+});
+$('#example_2').jQselect({
+    title:"Example 2",
+    searchtext:'Example 2',
+    livesearch:true,
+    noresults: 'No examples',
+    label:{
+        abort:'Abort',
+        save: 'Save',
+        single: 'example',
+        plural: 'examples',
+    },
+    action:true,
+    onChange: function(value) {
+    console.log("from here"+ value);
+      },
+});
+    </script>
+  </body>
+</html>
