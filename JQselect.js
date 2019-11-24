@@ -82,7 +82,7 @@ let value = [];
 
 $(selector).find("li").each(function() {
   if ($(element).attr("multiple")){
-    $(this).append('<input class="select_icon" type="checkbox" />');
+    $(this).append('<span class="select_icon"></span>');
   }
 if( $(this).attr("selected") === "selected"){
 value = [$(this).attr('value')];
@@ -90,7 +90,7 @@ update();
 }
 $(this).on("click", function(){
 $(selector).find("li").attr('selected', false);
-$(selector).find("li").find("input").attr('checked', false);
+$(selector).find("li").find("span").addClass('selected');
 if ($(element).attr("multiple")){
   if(value.includes($(this).attr('value')) ){
     removeItem(value, $(this).attr('value'));
@@ -151,11 +151,11 @@ var onClick = settings.onClick;
 function update(){
 $(selector).find("li").each(function() {
 $(this).attr('selected', false);
-$(this).find("input").attr('checked', false);
+$(this).find("span").removeClass('selected');
 for (let x = 0; x < value.length; x++) {
 if(parseInt(value[x]) == parseInt($(this).attr("value"))){
 $(this).attr('selected', true);
-$(this).find("input").attr('checked', true);
+$(this).find("span").addClass('selected');
 }
 }
 });

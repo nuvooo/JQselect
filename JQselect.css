@@ -112,7 +112,7 @@
     line-height: 40px;
     transition: ease all .3s;
     position: relative;
-    padding-left: 35px;
+    padding-left: 40px;
 }
 
 .input-modal ul li[selected]{
@@ -140,11 +140,22 @@
     border-radius: 4px;
     background-color: rgba(0, 0, 0, .3);
   }
-  .select_icon{
+  .input-modal ul li span{
     position: absolute;
+    height: 20px;
+    width: 20px;
     top: 50%;
     left: 10px;
     transform: translate(0, -50%);
-    height: 30px;
-    width: 30px;
+    background: #fff;
+    border:2px solid #ccc;
+    border-radius: 50%;
+    padding: 0;
+  }
+
+  .input-modal ul li span.selected{
+      background: #ccc;
+      -webkit-box-shadow:inset 0px 0px 0px 2px #fff;
+      -moz-box-shadow:inset 0px 0px 0px 2px #fff;
+      box-shadow:inset 0px 0px 0px 2px #fff;
   }
