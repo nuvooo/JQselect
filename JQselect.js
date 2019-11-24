@@ -1,43 +1,25 @@
-;(function($) {
-  $.jQselect = function(element, options) {
-  var defaults = {
-    select: null,
-      title: null,
-      label:{
-          abort:'Abort',
-          save: 'Save',
-          single: 'item',
-          plural: 'items',
-      },
-      action: true,
-      livesearch: true,
-      searchtext: 'search...',
-      noresults: 'no results', 
-      onChange: function onChange() {
-        return false;
-    },
-      onOpen: function onOpen() {
-      return false;
-     },
+(function($){
+	$.fn.jQselect = function(settings) {
+      var element = $(this);
 
-  }
-  var plugin = this;
-  plugin.settings = {
+    var defaults = {
+      select: null,
+        title: null,
+        label:{
+            abort:'Abort',
+            save: 'Save',
+            single: 'item',
+            plural: 'items',
+        },
+        action: true,
+        livesearch: true,
+        searchtext: 'search...',
+        noresults: 'no results'
+    }
 
-  }
-
-  var $element = $(element), // reference to the jQuery version of DOM element
-  element = element; // reference to the actual DOM element
-
-
-  // the "constructor" method that gets called when the object is created
-  plugin.init = function() {
-
-  // the plugin's final properties are the merged default and
-  // user-provided options (if any)
-  plugin.settings = $.extend({}, defaults, options);
-
-  // code goes here
+    var plugin = this;
+    plugin.settings = $.extend({}, defaults, settings);
+      // code goes here
   let footerAction = '';
   if(plugin.settings.action == true){
   footerAction = '<span class="abort">'+plugin.settings.label.abort+'</span><span class="success">'+plugin.settings.label.save+'</span>';
@@ -97,24 +79,17 @@ let value = [];
 
 $(selector).parent().parent().find(".input-modal ul li").each(function() {
   $(this).on("click", function(){
-    if ($(element).find(".input-modal ul").attr("multiple")){
+    if ($(element).attr("multiple")){
     value.push($(this).attr('value'));
+    console.log("multi");
     }
     else
     {
       value = [$(this).attr('value')];
     }
+    onChange.call(this, value);
   });
 });
-
-plugin.onOpen = function(value) {
-  return "qdqwdqwdqwd";
-};
-setInterval(function(){
-plugin.onChange = function(value) {
-  return "wefqwef";
-};
-},2000);
   let innerHtml = '<input class="input-select-search" type="text"><div data-list=""></div>';
   if(plugin.settings.livesearch === true){
     $(selector).parent().find(".input-select").html(innerHtml);
@@ -135,16 +110,11 @@ $(document).mouseup(function(e)
     }
 });
 
- }
-   plugin.init();
-   }
-   $.fn.jQselect = function(options) {
-      return this.each(function() {
-        if (undefined == $(this).data('jQselect')) {
-            var plugin = new $.jQselect(this, options);
-            $(this).data('jQselect', plugin);
-         }
-      });
-  }
 
+var onChange = settings.onChange;
+var onShow = settings.onShow;
+var onClick = settings.onClick;
+
+
+	};
 })(jQuery);
