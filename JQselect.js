@@ -109,7 +109,6 @@ $(selector).parent().on("click", ".success", function(){
 $(this).parent().hide();
   update();
   $(selector).find("li").each(function() {
-    $(this).attr('selected', false);
     for (let x = 0; x < value.length; x++) {
       if(parseInt(value[x]) == parseInt($(this).attr("value"))){
        $(selector).parent().parent().find(".input-search").text($(this).text());
