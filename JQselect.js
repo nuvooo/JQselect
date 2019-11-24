@@ -24,7 +24,7 @@
   if(plugin.settings.action == true){
   footerAction = '<span class="abort">'+plugin.settings.label.abort+'</span><span class="success">'+plugin.settings.label.save+'</span>';
   }
-  let start = '<div class="input-search" data-title="'+plugin.settings.title+'"><div class="input-modal"><div class="input-select"></div>';
+  let start = '<div class="input-search" data-title="'+plugin.settings.title+'"></div><div class="input-modal"><div class="input-select"></div>';
   let end = footerAction+'</div></div>';
   let rep =  $(element)
   .clone()
@@ -44,6 +44,8 @@
     selector = "#"+$(rep).attr('id');
   }
 
+  var selected = $(selector + " > li:first").text();
+  $(selector).parent().parent().find(".input-search").text(selected);
   $(selector).parent().parent().find(".input-modal ul").append('<div class="no-entrys">'+plugin.settings.noresults+'</div>');
   $(selector).parent().parent().on("click", function(e){
     $(this).find(".input-modal ul li").each(function() {
