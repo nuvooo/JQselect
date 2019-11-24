@@ -2,17 +2,27 @@
 <html>
   <head>
     <title>jQselect</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="JQselect.css"/>
   </head>
   <body>
-      <style>
-        #page{
-        width: 1000px;
-        max-width: 100%;
-        margin: 0 auto;
-        }
-        </style>
-      <div id="page">
+
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="container">
+    <a class="navbar-brand" href="#">jQselect</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+    </div>
+</div>
+</nav>
+    
+<div class="container mt-4">
+    <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-8">
     <h1>jQselect</h1>
       <div><h2>Standard select </h2>
         <p>
@@ -50,6 +60,8 @@
         </select>
       </p>
     </div>
+</div>
+</div>
       </div>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="JQselect.js"></script>
