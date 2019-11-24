@@ -95,6 +95,24 @@
     border-bottom: 1px solid #fff;
     line-height: 40px;
     transition: ease all .3s;
+    position: relative;
+}
+
+.input-modal ul[multiple] li{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    background: #fff;
+    padding: 0px 10px 0px 10px;
+    font-size: 12px;
+    border-bottom: 1px solid #fff;
+    line-height: 40px;
+    transition: ease all .3s;
+    position: relative;
+    padding-left: 35px;
 }
 
 .input-modal ul li[selected]{
@@ -111,12 +129,7 @@
     font-size: 18px;
     line-height: 40px;
 }
-.input-modal ul li.active{
-    background: aquamarine;
-}
-
 .input-modal ul li:hover{
-    font-weight: bold;
 }
 
 .input-modal ul::-webkit-scrollbar {
@@ -126,4 +139,12 @@
   .input-modal ul::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: rgba(0, 0, 0, .3);
+  }
+  .select_icon{
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translate(0, -50%);
+    height: 30px;
+    width: 30px;
   }

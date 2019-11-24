@@ -81,12 +81,16 @@ $(selector).find(".no-entrys").hide();
 let value = [];
 
 $(selector).find("li").each(function() {
+  if ($(element).attr("multiple")){
+    $(this).append('<input class="select_icon" type="checkbox" />');
+  }
 if( $(this).attr("selected") === "selected"){
 value = [$(this).attr('value')];
 update();
 }
 $(this).on("click", function(){
 $(selector).find("li").attr('selected', false);
+$(selector).find("li").find("input").attr('checked', false);
 if ($(element).attr("multiple")){
   if(value.includes($(this).attr('value')) ){
     removeItem(value, $(this).attr('value'));
@@ -147,9 +151,11 @@ var onClick = settings.onClick;
 function update(){
 $(selector).find("li").each(function() {
 $(this).attr('selected', false);
+$(this).find("input").attr('checked', false);
 for (let x = 0; x < value.length; x++) {
 if(parseInt(value[x]) == parseInt($(this).attr("value"))){
 $(this).attr('selected', true);
+$(this).find("input").attr('checked', true);
 }
 }
 });
