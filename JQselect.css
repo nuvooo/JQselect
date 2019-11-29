@@ -30,8 +30,10 @@
     position: absolute;
     display: none;
     overflow: hidden;
-    width:100%;
-    top: 49px;
+    width: inherit;
+    min-width: 300px;
+    top: 50px;
+    left: 0;
     background: #fff;
     z-index: 88888888;
     border-radius: 5px;
@@ -42,6 +44,9 @@
        -moz-user-select: none; 
         -ms-user-select: none; 
             user-select: none; 
+}
+.input-modal.active{
+display: block!important;
 }
 .input-modal .abort{
     position: absolute;

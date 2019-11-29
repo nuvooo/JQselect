@@ -14,23 +14,34 @@ plural: 'items',
 action: true,
 livesearch: true,
 searchtext: 'search...',
-noresults: 'no results'
+noresults: 'no results',
+null: "all items",
+onSave: function() { return null; },
+onChange: function() { return null; },
+onShow: function() { return null; },
 }
 
 var plugin = this;
 plugin.settings = $.extend({}, defaults, settings);
+
+
+let value = [];
+var onSave = plugin.settings.onSave;
+var onChange = plugin.settings.onChange;
+var onShow = plugin.settings.onShow;
 // code goes here
 let footerAction = '';
 if(plugin.settings.action == true){
 footerAction = '<span class="abort">'+plugin.settings.label.abort+'</span><span class="success">'+plugin.settings.label.save+'</span>';
 }
-let start = '<div class="input-search" data-title="'+plugin.settings.title+'"></div><div class="input-modal"><div class="input-select"></div>';
-let end = footerAction+'</div></div>';
+let start = '<div class="input-search" data-title="'+plugin.settings.title+'"><div class="inside"></div><div class="input-modal"><div class="input-select"></div>';
+let end = footerAction+'</div></div></div>';
 let rep =  $(element)
 .clone()
 .wrap('<div></div>')
 .parent().html()
 .replace(/select/g,'ul')
+.replace(/uled/g,'selected')
 .replace(/optgroup/g,"span")
 .replace(/option/g,"li");
 $(element).replaceWith(start + rep + end);
@@ -43,28 +54,43 @@ else
 {
 selector = "#"+$(rep).attr('id');
 }
-
-var selected = $(selector + " > li:first").text();
-$(selector + " > li:first").attr('selected', "true");
-$(selector).parent().parent().find(".input-search").text(selected);
+var selected = "";
+if ($(selector+" li").attr('selected')){
+selected = $(selector+" li[selected]").text();
+}
+if ($(element).attr("multiple")){
+$(selector).parent().parent().parent().find(".input-search").find(".inside").text(plugin.settings.null);
+}
+else
+{
+  $(selector).parent().parent().parent().find(".input-search").find(".inside").text(selected);
+}
 $(selector).parent().parent().find(".input-modal ul").append('<div class="no-entrys">'+plugin.settings.noresults+'</div>');
-$(selector).parent().parent().on("click", function(e){
-$(this).find(".input-modal ul li").each(function() {
-$(this).show();
-$(this).parent().find(".no-entrys").hide();
+
+
+$(selector).parent().parent().parent().find(".input-search").click(function() {
+  $(selector).parent().toggleClass( "active" );
+  open($(selector).parent());
 });
-e.preventDefault();
-$(this).find(".input-modal").css("display", "block");
-$(this).find(".input-select input").val("");
-$(this).find(".input-select input").focus();
-$(this).find(".input-select input").keyup(function() {
+
+
+function open(selectID){
+  console.log(selectID);
+$(selectID).find("ul li").each(function() {
+$(selectID).find("ul").find(".no-entrys").hide();
+});
+$(selectID).find(".input-select input").val("");
+if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+  $(selectID).find(".input-select input").focus();
+ }
+$(selectID).find(".input-select input").keyup(function() {
 var filter = $(this).val();
 count = 0;
 $(selector).find("li").each(function() {
-if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+if ($(selectID).text().search(new RegExp(filter, "i")) < 0) {
 $(this).hide(); 
 } else {
-$(this).show();
+
 count++;
 }
 });
@@ -76,9 +102,7 @@ else
 $(selector).find(".no-entrys").hide();
 }
 });
-});
-
-let value = [];
+}
 
 $(selector).find("li").each(function() {
   if ($(element).attr("multiple")){
@@ -104,7 +128,7 @@ else
 {
 value = [$(this).attr('value')];
 }
-onChange.call(this, value);
+
 update();
 });
 });
@@ -115,21 +139,14 @@ if(plugin.settings.searchtext.length > 0){
 $(selector).parent().find(".input-select").find(".input-select-search").attr("placeholder", plugin.settings.searchtext);
 }
 }
-$(document).on("click",".abort, .success",function(){
-$(selector).parent().parent().find(".input-modal").css("display", "none");
+$(selector).parent().parent().find(".input-modal").find(".abort, .success").on("click" ,function(){
+$(this).parent().find(".input-modal").removeClass("active");
 update();
 });
 
 $(selector).parent().on("click", ".success", function(){
 $(this).parent().hide();
-update();
-$(selector).find("li").each(function() {
-for (let x = 0; x < value.length; x++) {
-if(parseInt(value[x]) == parseInt($(this).attr("value"))){
-$(selector).parent().parent().find(".input-search").text($(this).text());
-}
-}
-});
+onSave.call(this, value);
 });
 
 
@@ -139,14 +156,10 @@ var container = $(selector).parent().parent().find(".input-modal");
 if (!container.is(e.target) && container.has(e.target).length === 0) 
 {
 container.hide();
-update();
 }
 });
 
 
-var onChange = settings.onChange;
-var onShow = settings.onShow;
-var onClick = settings.onClick;
 
 function update(){
 $(selector).find("li").each(function() {
@@ -158,7 +171,29 @@ $(this).attr('selected', true);
 $(this).find("span").addClass('selected');
 }
 }
+
 });
+
+$(selector).find("li").each(function() {
+
+  if(value.length <= 0){
+    $(selector).parent().parent().parent().find(".input-search").find(".inside").text(plugin.settings.null);
+  }
+  if ( value.length <= 1){
+    if(parseInt(value[0]) == parseInt($(this).attr("value"))){
+      $(selector).parent().parent().parent().find(".input-search").find(".inside").text($(this).text());
+      }
+  }
+  else
+  {
+for (let x = 0; x < value.length; x++) {
+if(parseInt(value[x]) == parseInt($(this).attr("value"))){
+$(selector).parent().parent().parent().find(".input-search").find(".inside").html('<span class="length">'+value.length +'</span> '+ plugin.settings.label.plural);
+}
+}
+  }
+});
+onChange.call(this, value);
 }
 
 function removeItem(array, item){
@@ -169,6 +204,7 @@ function removeItem(array, item){
       }
   }
 }
+
 
 };
 })(jQuery);
