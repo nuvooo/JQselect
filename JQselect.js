@@ -82,7 +82,7 @@ $(selectID).find(".input-select input").val("");
 if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
   $(selectID).find(".input-select input").focus();
  }
-$(selectID).find(".input-select input").keyup(function() {
+$(selectID).parent().find(".input-select input").keyup(function() {
 var filter = $(this).val();
 count = 0;
 $(selector).find("li").each(function() {
@@ -154,7 +154,7 @@ $(document).mouseup(function(e)
 var container = $(selector).parent().parent().find(".input-modal");
 if (!container.is(e.target) && container.has(e.target).length === 0) 
 {
-container.hide();
+container.removeClass("active");
 }
 });
 
