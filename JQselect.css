@@ -87,6 +87,9 @@ display: block!important;
     margin: 0 0px 60px 4px;
     max-height: 225px;
 }
+.input-modal ul li:first-child{
+    margin-top:5px!important;
+}
 .input-modal ul li{
     height: 100%;
     width: 100%;
@@ -97,7 +100,8 @@ display: block!important;
     background: #fff;
     padding: 0px 10px 0px 10px;
     font-size: 12px;
-    border-bottom: 1px solid #fff;
+    margin-top: 2px;
+    margin-bottom: 2px;
     line-height: 40px;
     transition: ease all .3s;
     position: relative;
@@ -109,9 +113,7 @@ display: block!important;
     display: flex;
     flex-direction: column;
     list-style: none;
-    margin: 0;
     background: #fff;
-    padding: 0px 10px 0px 10px;
     font-size: 12px;
     border-bottom: 1px solid #fff;
     line-height: 40px;
@@ -124,6 +126,7 @@ display: block!important;
     font-weight: bold;
     background:#e49e26;
     color:#fff;
+    border-radius: 5px;
 }
 .input-modal ul span{
     height: 100%;

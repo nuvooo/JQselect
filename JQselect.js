@@ -19,6 +19,7 @@ null: "all items",
 onSave: function() { return null; },
 onChange: function() { return null; },
 onShow: function() { return null; },
+onHide: function() { return null; },
 }
 
 var plugin = this;
@@ -29,6 +30,7 @@ let value = [];
 var onSave = plugin.settings.onSave;
 var onChange = plugin.settings.onChange;
 var onShow = plugin.settings.onShow;
+var onHide = plugin.settings.onHide;
 // code goes here
 let footerAction = '';
 if(plugin.settings.action == true){
@@ -67,10 +69,20 @@ $(selector).parent().parent().parent().find(".input-search").find(".inside").tex
 }
 $(selector).parent().parent().find(".input-modal ul").append('<div class="no-entrys">'+plugin.settings.noresults+'</div>');
 
-
+var state = 0;
 $(selector).parent().parent().parent().find(".input-search").find(".inside").click(function() {
-  $(selector).parent().toggleClass( "active" );
+  if(state == 0){
+  $(selector).parent().addClass( "active" );
   open($(selector).parent());
+  onShow.call(this);
+  state = 1;
+  }
+  else
+  {
+    state = 0;
+    $(selector).parent().removeClass( "active" );
+  onHide.call(this);
+  }
 });
 
 
@@ -148,7 +160,6 @@ $(selector).parent().on("click", ".success", function(){
 onSave.call(this, value);
 });
 
-
 $(document).mouseup(function(e) 
 {
 var container = $(selector).parent().parent().find(".input-modal");
@@ -157,8 +168,6 @@ if (!container.is(e.target) && container.has(e.target).length === 0)
 container.removeClass("active");
 }
 });
-
-
 
 function update(){
 $(selector).find("li").each(function() {
