@@ -122,6 +122,8 @@ display: block!important;
 
 .input-modal ul li[selected]{
     font-weight: bold;
+    background:#e49e26;
+    color:#fff;
 }
 .input-modal ul span{
     height: 100%;
@@ -164,3 +166,14 @@ display: block!important;
       -moz-box-shadow:inset 0px 0px 0px 2px #fff;
       box-shadow:inset 0px 0px 0px 2px #fff;
   }
+.inside{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+.inside span{
+    padding-right: 5px;
+}

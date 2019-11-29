@@ -63,19 +63,18 @@ $(selector).parent().parent().parent().find(".input-search").find(".inside").tex
 }
 else
 {
-  $(selector).parent().parent().parent().find(".input-search").find(".inside").text(selected);
+$(selector).parent().parent().parent().find(".input-search").find(".inside").text(selected);
 }
 $(selector).parent().parent().find(".input-modal ul").append('<div class="no-entrys">'+plugin.settings.noresults+'</div>');
 
 
-$(selector).parent().parent().parent().find(".input-search").click(function() {
+$(selector).parent().parent().parent().find(".input-search").find(".inside").click(function() {
   $(selector).parent().toggleClass( "active" );
   open($(selector).parent());
 });
 
 
 function open(selectID){
-  console.log(selectID);
 $(selectID).find("ul li").each(function() {
 $(selectID).find("ul").find(".no-entrys").hide();
 });
@@ -140,12 +139,12 @@ $(selector).parent().find(".input-select").find(".input-select-search").attr("pl
 }
 }
 $(selector).parent().parent().find(".input-modal").find(".abort, .success").on("click" ,function(){
-$(this).parent().find(".input-modal").removeClass("active");
+$(this).parent().parent().find(".input-modal").removeClass("active");
 update();
 });
 
 $(selector).parent().on("click", ".success", function(){
-$(this).parent().hide();
+  $(this).parent().parent().find(".input-modal").removeClass("active");
 onSave.call(this, value);
 });
 
