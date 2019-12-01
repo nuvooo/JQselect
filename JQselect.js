@@ -36,7 +36,7 @@ let footerAction = '';
 if(plugin.settings.action == true){
 footerAction = '<span class="abort">'+plugin.settings.label.abort+'</span><span class="success">'+plugin.settings.label.save+'</span>';
 }
-let start = '<div class="input-search" data-title="'+plugin.settings.title+'"><div class="inside"></div><div class="input-modal"><div class="input-select"></div>';
+let start = '<div class="input-search" data-title="'+plugin.settings.title+'"><div class="inside ripple"></div><div class="input-modal"><div class="input-select"></div>';
 let end = footerAction+'</div></div></div>';
 let rep =  $(element)
 .clone()
@@ -70,7 +70,7 @@ $(selector).parent().parent().parent().find(".input-search").find(".inside").tex
 $(selector).parent().parent().find(".input-modal ul").append('<div class="no-entrys">'+plugin.settings.noresults+'</div>');
 
 var state = 0;
-$(selector).parent().parent().parent().find(".input-search").find(".inside").click(function() {
+$(selector).parent().parent().parent().find(".input-search").find(".inside").on("click", function() {
   if(state == 0){
   $(selector).parent().addClass( "active" );
   open($(selector).parent());
@@ -153,6 +153,7 @@ $(selector).parent().find(".input-select").find(".input-select-search").attr("pl
 $(selector).parent().parent().find(".input-modal").find(".abort, .success").on("click" ,function(){
 $(this).parent().parent().find(".input-modal").removeClass("active");
 update();
+state = 0;
 });
 
 $(selector).parent().on("click", ".success", function(){
@@ -162,7 +163,7 @@ onSave.call(this, value);
 
 $(document).mouseup(function(e) 
 {
-var container = $(selector).parent().parent().find(".input-modal");
+var container = $(selector).parent().parent().find(".input-modal.active");
 if (!container.is(e.target) && container.has(e.target).length === 0) 
 {
 container.removeClass("active");
